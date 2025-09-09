@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+    <style>
+        .completed { 
+            text-decoration: line-through;
+            color: black;
+        }
+
+        button.remove {
+            margin-left: 10px;
+            background-color: antiquewhite;
+            color: brown;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <input type="text" id="taskInput" placeholder="New Task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="output"></ul>
+
+    <script>
+        function addTask() {
+            let taskText = document.getElementById("taskInput").value;
+            if (taskText !== "") {
+                let li = document.createElement("li");
+                li.textContent = taskText;
+
+                
+                li.addEventListener("click", function () {
+                    li.classList.toggle("completed");
+                });
+
+                
+                const removeBtn = document.createElement("button");
+                removeBtn.textContent = "Remove";
+                removeBtn.className = "remove";
+
+                removeBtn.addEventListener("click", function (e) {
+                    e.stopPropagation(); 
+                    li.remove();
+                });
+
+                li.appendChild(removeBtn);
+                document.getElementById("output").appendChild(li);
+
+                
+                document.getElementById("taskInput").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
